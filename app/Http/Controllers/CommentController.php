@@ -160,6 +160,7 @@ class CommentController extends Controller
     public function destroy($name, $id)
     {
         $comment = Comment::findOrFail($id);
+        $post = $comment->post_id;
 
         if (Gate::denies('delete-comment', $comment))
             abort(403);
@@ -175,11 +176,7 @@ class CommentController extends Controller
                 unlink($image_path);
             }
 
-            return redirect()->route('postForm', ['id' => $id, 'title' => $name])->with([
-                'success' => true,
-                'message_type' => 'success',
-                'message' => 'Pomyślnie usunięto komentarz o nazwie ' . $comment->name . '.'
-            ]);
+            return redirect()->route('postForm', ['id' => $comment->post_id, 'title' => Post::findOrFail($post)->title]);
         }
 
         return back()->with([

@@ -117,7 +117,7 @@
                         @if ($com->user->id === Auth::user()->id)
                             <a class="btn btn-success btn-sm" href="{{ route('editComment', $com->id) }}" role="button">Edytuj</a>
                             <a class="btn btn-danger btn-sm"
-                               href="{{ route('deleteComment', ['name' => $post->title, 'id' => $com]) }}" role="button"
+                               href="{{ route('deleteComment', ['name' => $com->message, 'id' => $com]) }}" role="button"
                                onclick="return confirm('Jesteś pewien?')" title="Skasuj"><i class="fa fa-trash-o"></i>
                                 Usuń</a>
                         @endif
